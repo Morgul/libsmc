@@ -1,0 +1,34 @@
+{
+  "name": "libsmc",
+  "version": "0.0.1",
+  "description": "libsmc retrieves info from the Apple System Management Controller API",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/tape test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brendanashworth/libsmc"
+  },
+  "keywords": [
+    "libsmc",
+    "smc",
+    "apple",
+    "temperature",
+    "fan"
+  ],
+  "author": "Brendan Ashworth",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brendanashworth/libsmc/issues"
+  },
+  "homepage": "https://github.com/brendanashworth/libsmc",
+  "dependencies": {
+    "bindings": "^1.2.1",
+    "nan": "^2.6.2",
+    "tape": "^4.6.3"
+  }
+}
