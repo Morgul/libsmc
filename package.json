@@ -1,6 +1,6 @@
 {
   "name": "libsmc",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "libsmc retrieves info from the Apple System Management Controller API",
   "main": "index.js",
   "directories": {

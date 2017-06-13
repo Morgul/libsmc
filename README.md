@@ -1,4 +1,7 @@
-# libsmc [![Build Status](https://travis-ci.org/brendanashworth/libsmc.svg?branch=master)](https://travis-ci.org/brendanashworth/libsmc)
+# libsmc
+
+[![Build Status](https://travis-ci.org/brendanashworth/libsmc.svg?branch=master)](https://travis-ci.org/brendanashworth/libsmc)
+[![NPM version](https://badge.fury.io/js/libsmc.svg)](http://badge.fury.io/js/libsmc)
 
 > libsmc is a node.js binding to [libsmc](https://github.com/beltex/libsmc).
 It retrieves info from the Apple System Management Controller API. The SMC
