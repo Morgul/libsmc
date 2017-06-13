@@ -1,6 +1,6 @@
 'use strict';
 
-const binding = require('bindings')('smc');
+var binding = require('bindings')('smc');
 
 // SMC needs to be opened and closed.
 binding.Open();
@@ -22,11 +22,11 @@ exports.getFan = function(number) {
     if (typeof number !== 'number' || (number < 0))
         throw new Error('fan number must be a positive integer');
 
-    let info = binding.GetFanInformation(number);
+    var info = binding.GetFanInformation(number);
 
     // If it's falsy, then the binding bailed.
     if (!info)
-        throw new Error(`GetFanInformation failed (fan ${number} may not exist)`);
+        throw new Error('GetFanInformation failed (fan may not exist)');
 
     return info;
 };
