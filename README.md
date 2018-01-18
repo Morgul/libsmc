@@ -54,5 +54,18 @@ var fan = smc.getFan(0);
 // => { name: 'ExhaustZ', speed: 2176 }
 ```
 
+### `smc.getTemp(sensor, units)`
+Gets the temperature value related to a specific sensor. `sensor` is a valid SMC
+sensor name (ex: `'TC0P'`). `units` is the string `'celsius'`, `'fahrenheit'`, or
+`'kelvin'` (case insensitive). Defaults to `'celsius'`. Returns a floating point
+number that is in the units specified.
+
+```javascript
+var smc = require('libsmc');
+
+var fan = smc.getTemp('TC0P', 'kelvin');
+// => 315.15
+```
+
 ## License
 MIT license. beltex's libsmc is [licensed separately](./deps/libsmc/LICENSE).
