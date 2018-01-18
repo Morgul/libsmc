@@ -49,15 +49,6 @@ namespace libsmc {
     info.GetReturnValue().Set(status);
   }
 
-  // Checks whether the machine is under battery power. Returns a boolean.
-  NAN_METHOD(GetTemp) {
-    // Retrieve the temperature based on key
-    //TODO: Let the user pick the units.
-    double temp = get_tmp((char *)*v8::String::Utf8Value(info[0]), CELSIUS);
-
-    info.GetReturnValue().Set(temp);
-  }
-
   // Retrieves the number of fans in a machine. Returns an integer.
   NAN_METHOD(GetFans) {
     int fans = get_num_fans();
@@ -95,6 +86,37 @@ namespace libsmc {
              Nan::New(rpm));
 
     info.GetReturnValue().Set(information);
+  }
+
+  // Checks whether the machine is under battery power. Returns a boolean.
+  NAN_METHOD(GetTemp) {
+    tmp_unit_t units;
+
+    // Read the unit type in from Javascript as an integer (for our ease of use)
+    Nan::Maybe<unsigned int> maybeNumber = Nan::To<unsigned int>(info[1]);
+    unsigned int unitType = maybeNumber.FromMaybe(0);
+
+
+    // Populate our units variable
+    switch(unitType) {
+        case 1:
+            units = FAHRENHEIT;
+            break;
+
+        case 2:
+            units = KELVIN;
+            break;
+
+        case 0:
+        default:
+            units = CELSIUS;
+            break;
+    }
+
+    // Retrieve the temperature based on key
+    double temp = get_tmp((char*)*v8::String::Utf8Value(info[0]), units);
+
+    info.GetReturnValue().Set(temp);
   }
 
   // Initialize the module by exporting the methods.
