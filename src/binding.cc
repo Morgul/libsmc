@@ -49,6 +49,15 @@ namespace libsmc {
     info.GetReturnValue().Set(status);
   }
 
+  // Checks whether the machine is under battery power. Returns a boolean.
+  NAN_METHOD(GetTemp) {
+    // Retrieve the temperature based on key
+    //TODO: Let the user pick the units.
+    double temp = get_tmp((char *)*v8::String::Utf8Value(info[0]), CELSIUS);
+
+    info.GetReturnValue().Set(temp);
+  }
+
   // Retrieves the number of fans in a machine. Returns an integer.
   NAN_METHOD(GetFans) {
     int fans = get_num_fans();
@@ -98,6 +107,8 @@ namespace libsmc {
 
     NAN_EXPORT(exports, GetFans);
     NAN_EXPORT(exports, GetFanInformation);
+
+    NAN_EXPORT(exports, GetTemp);
   }
 
   NODE_MODULE(libsmc, Initialize)

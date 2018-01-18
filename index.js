@@ -34,3 +34,12 @@ exports.getFan = function(number) {
 exports.getNumberOfFans = function() {
     return binding.GetFans();
 };
+
+exports.getTemp = function(tempKey) {
+    if (!tempKey)
+        throw new Error('Must pass a valid temperature key to read');
+
+    var info = binding.GetTemp(tempKey);
+
+    return info || 0;
+};

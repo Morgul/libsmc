@@ -55,3 +55,13 @@ test('getFan()', function(t) {
     t.ok(typeof info.name === 'string');
     t.ok(typeof info.speed === 'number');
 });
+
+test('getTemp()', function(t) {
+    t.plan(2);
+
+    // Get the first CPU proximity value and just test that
+    var info = smc.getTemp('TC0P');
+
+    t.ok(typeof info === 'number');
+    t.ok(info > 0);
+});
