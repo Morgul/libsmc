@@ -88,6 +88,36 @@ namespace libsmc {
     info.GetReturnValue().Set(information);
   }
 
+  // Sets the minimum RPM value for a fan
+  NAN_METHOD(SetFanMinRPM)
+  {
+    // JS provides us with a fan number, but that might not be satisfactory.
+    // Bail if it doesn't fit into an unsigned int type.
+    Nan::Maybe<unsigned int> maybeFanNumber = Nan::To<unsigned int>(info[0]);
+    if (maybeFanNumber.IsNothing())
+      return;
+
+    unsigned int fanNumber = maybeFanNumber.FromMaybe(0);
+
+    // JS provides us with an rpm number, but that might not be satisfactory.
+    // Bail if it doesn't fit into an unsigned int type.
+    Nan::Maybe<unsigned int> maybeRPMNumber = Nan::To<unsigned int>(info[1]);
+    if (maybeRPMNumber.IsNothing())
+      return;
+
+    unsigned int rpm = maybeRPMNumber.FromMaybe(0);
+
+    // Get auth boolean
+    Nan::Maybe<bool> maybeAuth = Nan::To<bool>(info[2]);
+    bool auth = maybeAuth.FromMaybe(true);
+
+    // Attempt to set the fan RPM
+    bool success = set_fan_min_rpm(fanNumber, rpm, auth);
+
+    // Return whether or not it worked.
+    info.GetReturnValue().Set(success);
+  }
+
   // Initialize the module by exporting the methods.
   void Initialize(v8::Local<v8::Object> exports) {
     NAN_EXPORT(exports, Open);
@@ -98,6 +128,7 @@ namespace libsmc {
 
     NAN_EXPORT(exports, GetFans);
     NAN_EXPORT(exports, GetFanInformation);
+    NAN_EXPORT(exports, SetFanMinRPM);
   }
 
   NODE_MODULE(libsmc, Initialize)
