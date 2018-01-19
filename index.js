@@ -34,3 +34,16 @@ exports.getFan = function(number) {
 exports.getNumberOfFans = function() {
     return binding.GetFans();
 };
+
+exports.setFanMinRPM = function(fanNum, rpm, auth) {
+    if (typeof fanNum !== 'number' || (fanNum < 0))
+        throw new Error('fan number must be a positive integer');
+
+    if (typeof rpm !== 'number' || (rpm <= 0))
+        throw new Error('rpm must be a positive integer or 0');
+
+    // Convert to a boolean
+    auth = !!auth;
+
+    return binding.SetFanMinRPM(fanNum, rpm, auth);
+};
