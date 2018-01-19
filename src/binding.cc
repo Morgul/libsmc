@@ -88,7 +88,7 @@ namespace libsmc {
     info.GetReturnValue().Set(information);
   }
 
-  // Checks whether the machine is under battery power. Returns a boolean.
+  // Retrieves the temperature for the specified sensor.
   NAN_METHOD(GetTemp) {
     tmp_unit_t units;
 

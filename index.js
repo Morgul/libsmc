@@ -36,7 +36,7 @@ exports.getNumberOfFans = function() {
 };
 
 exports.getTemp = function(tempKey, units) {
-    if (!tempKey)
+    if (typeof tempKey !== 'string')
         throw new Error('Must pass a valid temperature key to read');
 
     var unitType = 0;
@@ -47,21 +47,19 @@ exports.getTemp = function(tempKey, units) {
 
         switch(units)
         {
-        case 'FAHRENHEIT':
+        case 'F':
             unitType = 1;
             break;
 
-        case 'KELVIN':
+        case 'K':
             unitType = 2;
             break;
 
-        case 'CELSIUS':
+        case 'C':
         default:
             unitType = 0;
         }
     }
 
-    var info = binding.GetTemp(tempKey, unitType);
-
-    return info || 0;
+    return binding.GetTemp(tempKey, unitType);
 };
