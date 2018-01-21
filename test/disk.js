@@ -66,12 +66,12 @@ test('getTemp()', function(t) {
     t.ok(info > 0);
 
     // Test units
-    info = smc.getTemp('TC0P', 'FAHRENHEIT');
+    info = smc.getTemp('TC0P', 'F');
 
     t.ok(typeof info === 'number');
     t.ok(info > 0);
 
-    info = smc.getTemp('TC0P', 'KELVIN');
+    info = smc.getTemp('TC0P', 'K');
 
     t.ok(typeof info === 'number');
     t.ok(info > 200);

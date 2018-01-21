@@ -39,27 +39,8 @@ exports.getTemp = function(tempKey, units) {
     if (typeof tempKey !== 'string')
         throw new Error('Must pass a valid temperature key to read');
 
-    var unitType = 0;
+    var types = { 'C': 0, 'F': 1, 'K': 2 };
+    var selection = types[units && units.toUpperCase()] || 0;
 
-    if(units) {
-        // We unify this for checking
-        units = units.toUpperCase();
-
-        switch(units)
-        {
-        case 'F':
-            unitType = 1;
-            break;
-
-        case 'K':
-            unitType = 2;
-            break;
-
-        case 'C':
-        default:
-            unitType = 0;
-        }
-    }
-
-    return binding.GetTemp(tempKey, unitType);
+    return binding.GetTemp(tempKey, selection);
 };
