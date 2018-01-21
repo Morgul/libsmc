@@ -39,6 +39,9 @@ exports.getTemp = function(tempKey, units) {
     if (typeof tempKey !== 'string')
         throw new Error('Must pass a valid temperature key to read');
 
+    if (units && typeof units !== 'string')
+        throw new Error('Must pass a valid string for units');
+
     var types = { 'C': 0, 'F': 1, 'K': 2 };
     var selection = types[units && units.toUpperCase()] || 0;
 

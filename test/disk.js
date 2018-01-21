@@ -57,13 +57,21 @@ test('getFan()', function(t) {
 });
 
 test('getTemp()', function(t) {
-    t.plan(6);
+    t.plan(10);
 
     // Get the first CPU proximity value and just test that
     var info = smc.getTemp('TC0P');
 
     t.ok(typeof info === 'number');
     t.ok(info > 0);
+
+    t.throws(function(){
+        smc.getTemp(99);
+    });
+
+    t.throws(function(){
+        smc.getTemp(null);
+    });
 
     // Test units
     info = smc.getTemp('TC0P', 'F');
@@ -75,4 +83,12 @@ test('getTemp()', function(t) {
 
     t.ok(typeof info === 'number');
     t.ok(info > 200);
+
+    t.throws(function(){
+        smc.getTemp('TC0P', 99);
+    });
+
+    t.throws(function(){
+        smc.getTemp('TC0P', {});
+    });
 });
